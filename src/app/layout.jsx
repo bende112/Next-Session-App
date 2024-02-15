@@ -4,6 +4,7 @@ import { UserInfo } from "../components/UserInfo";
 import "./globals.css";
 import Link from "next/link";
 import { Providers } from "@/Providers";
+import { LogoutButton } from "@/components/LogoutButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,7 @@ export default async function RootLayout({ children }) {
         <Providers>
           <header className="border-b border-zinc-800 p-4 flex items-center">
             <Link href="/" className="text-xl">
-            MynextApp
+            MyNextApp
             </Link>
             <Link
               href="/add-post"
