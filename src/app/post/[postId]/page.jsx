@@ -2,6 +2,7 @@ import { CommentForm } from "@/components/CommentForm";
 import { CommentList } from "@/components/CommentList";
 import { Vote } from "@/components/Vote";
 import { db } from "@/db";
+import Tiptap from "@/components/TipTap";
 
 export default async function SinglePostPage({ params }) {
   const postId = params.postId;
