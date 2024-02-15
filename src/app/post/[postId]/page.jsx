@@ -2,12 +2,13 @@ import { CommentForm } from "@/components/CommentForm";
 import { CommentList } from "@/components/CommentList";
 import { Vote } from "@/components/Vote";
 import { db } from "@/db";
+import Tiptap from "@/components/TipTap";
 
 export default async function SinglePostPage({ params }) {
   const postId = params.postId;
 
   const { rows: posts } = await db.query(
-    `SELECT posts.id, posts.title, posts.body, posts.created_at, users.name, 
+    `SELECT posts.id, posts.title, posts.body, posts.created_at, users.name,
     COALESCE(SUM(votes.vote), 0) AS vote_total
     FROM posts
     JOIN users ON posts.user_id = users.id
@@ -29,6 +30,7 @@ export default async function SinglePostPage({ params }) {
       <h1 className="text-2xl">
         {post.vote_total} - {post.title}
       </h1>
+      <Tiptap />
       <p className="text-zinc-400 border-b border-zinc-800 mb-4">
         Posted by {post.name}
       </p>
@@ -40,7 +42,7 @@ export default async function SinglePostPage({ params }) {
       <CommentForm postId={post.id} />
       <CommentList postId={post.id} />
 
-      {/* <ul>
+      <ul>
         {votes.map((vote) => (
           <li key={vote.id} className="text-zinc-400">
             <span className="text-white">{vote.name}</span> votes{" "}
@@ -48,7 +50,7 @@ export default async function SinglePostPage({ params }) {
             <small>{new Date(vote.created_at).toUTCString()}</small>
           </li>
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 }
